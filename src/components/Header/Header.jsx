@@ -11,38 +11,32 @@ export const Header = () => {
 
   return (
     <header className={css.header}>
-      <nav className={css.nav}>
-        <NavLink className={css.button} to="/">
-          Home
-        </NavLink>
-        {!isLoggedIn && (
-          <>
-            <NavLink className={css.button} to="/register">
-              Registration
-            </NavLink>
-            <NavLink className={css.button} to="/login">
-              LogIn
-            </NavLink>
-          </>
-        )}
-        {isLoggedIn && (
-          <NavLink className={css.button} to="/contacts">
-            MyContacts
+      <NavLink className={css.button} to="/">
+        Home
+      </NavLink>
+      {!isLoggedIn ? (
+        <div className={css.login}>
+          <NavLink className={css.button} to="/register">
+            Registration
           </NavLink>
-        )}
-      </nav>
-
-      {isLoggedIn && (
-        <div className={css.logOutWrapper}>
-          <h3>Hi! {userName}</h3>
-          <button
-            className={css.button}
-            type="button"
-            onClick={() => dispatch(logOut())}
-          >
-            Log Out
-          </button>
+          <NavLink className={css.button} to="/login">
+            LogIn
+          </NavLink>
         </div>
+      ) : (
+          <div className={css.nav}>
+            <NavLink className={css.button} to="/contacts">MyContacts</NavLink>
+          <div className={css.logOutWrapper}>
+            <h3>Hi! {userName}</h3>
+            <button
+              className={css.button}
+              type="button"
+              onClick={() => dispatch(logOut())}
+            >
+              Log Out
+            </button>
+          </div>
+          </div>
       )}
     </header>
   );

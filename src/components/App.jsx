@@ -2,7 +2,7 @@ import { useEffect, lazy } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { PrivateRoute, PublickRoute } from 'components/Navigation';
-import { selectIsRefreshing } from 'redux/auth/selectors';
+import { selectIsRefreshing, selectIsLoggedIn } from 'redux/auth/selectors';
 import { refreshUser } from 'redux/auth/operations';
 import { SharedLayout } from 'components/SharedLayout/SharedLayout';
 import css from './App.module.css';
@@ -14,6 +14,8 @@ const Home = lazy(() => import('pages/Home/Home'));
 
 const App = () => {
   const dispatch = useDispatch();
+
+  const isLoggedIn = useSelector(selectIsLoggedIn);
 
   const refresh = useSelector(selectIsRefreshing);
 
@@ -37,6 +39,7 @@ const App = () => {
           path="/register"
           element={<PublickRoute component={<Register />} />}
         />
+      <Route path="*" element={isLoggedIn ? <Contacts /> : <Login />} />
       </Route>
     </Routes>
   );

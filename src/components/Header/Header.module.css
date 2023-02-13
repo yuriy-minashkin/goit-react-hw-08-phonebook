@@ -42,5 +42,10 @@
   display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 10px;
+    gap: 60px;
+}
+
+.login {
+  display: flex;
+  gap: 10px;
 }
