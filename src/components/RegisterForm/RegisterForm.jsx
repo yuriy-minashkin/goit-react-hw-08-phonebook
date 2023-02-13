@@ -1,8 +1,12 @@
+import {useState} from 'react';
 import { useDispatch } from 'react-redux';
 import { register } from 'redux/auth/operations';
 import css from './RegisterForm.module.css';
 
 const RegisterForm = () => {
+  const [nameInput, setNameInput] = useState('');
+  const [passwordInput, setPasswordInput] = useState('');
+
   const dispatch = useDispatch();
 
   const submitHandler = event => {
@@ -15,13 +19,6 @@ const RegisterForm = () => {
     const newUser = { name, email, password };
 
     dispatch(register(newUser))
-      
-    //   ? dispatch(register(newUser))
-    //   : alert('Enter your Name.');
-
-    // password.length > 6
-    //   ? dispatch(register(newUser))
-    //   : alert('Password must be at least 7 digits in length.');
   };
 
   return (
@@ -33,6 +30,8 @@ const RegisterForm = () => {
           name="name"
           type="text"
           autoComplete="on"
+          value={nameInput}
+          onChange={event => setNameInput(event.target.value)}
         ></input>
       </label>
       <label className={css.label}>
@@ -47,10 +46,16 @@ const RegisterForm = () => {
 
       <label className={css.label}>
         Password
-        <input className={css.input} name="password" type="password"></input>
+        <input
+          className={css.input}
+          name="password"
+          type="password"
+          value={passwordInput}
+          onChange={event => setPasswordInput(event.target.value)}
+        ></input>
       </label>
 
-      <button className={css.button} type="submit">
+      <button disabled={!nameInput || passwordInput.length < 7} className={css.button} type="submit">
         Register now
       </button>
     </form>
