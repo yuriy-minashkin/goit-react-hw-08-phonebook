@@ -14,13 +14,14 @@ const RegisterForm = () => {
     const password = elements.password.value;
     const newUser = { name, email, password };
 
-    name.length !== 0
-      ? dispatch(register(newUser))
-      : alert('Enter your Name.');
+    dispatch(register(newUser))
+      
+    //   ? dispatch(register(newUser))
+    //   : alert('Enter your Name.');
 
-    password.length > 6
-      ? dispatch(register(newUser))
-      : alert('Password must be at least 7 digits in length.');
+    // password.length > 6
+    //   ? dispatch(register(newUser))
+    //   : alert('Password must be at least 7 digits in length.');
   };
 
   return (
